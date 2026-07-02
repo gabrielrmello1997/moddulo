@@ -235,7 +235,6 @@ footer .wrap {
   object-fit: cover;
   z-index: 0;
   filter: saturate(0.3) brightness(0.4) contrast(1);
-  speed: 0.5;
 }
 
 .hero-video-overlay {

@@ -28,7 +28,7 @@ export default function Header() {
     <>
       <header className={scrolled ? "scrolled" : ""}>
         <div className="wrap">
-          <Logo />
+          <a href="#" aria-label="Go to homepage"><Logo /></a>
           <nav>
             <a className="navlink" href="#services">{n.services}</a>
             <a className="navlink" href="#approach">{n.approach}</a>

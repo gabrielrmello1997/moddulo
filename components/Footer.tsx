@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="wrap">
-        <Logo />
+        <a href="#" aria-label="Go to homepage"><Logo /></a>
         <div className="foot-note">
           {t[lang].footer.copy}
         </div>
