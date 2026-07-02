@@ -1,6 +1,5 @@
 "use client";
 
-import GridBackground from "./GridBackground";
 import Reveal from "./Reveal";
 import { useLang } from "@/context/LanguageContext";
 import { t } from "@/lib/i18n";
@@ -11,7 +10,15 @@ export default function Hero() {
 
   return (
     <section className="hero">
-      <GridBackground />
+      <video
+        className="hero-video"
+        src="/159052-818026310.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+      <div className="hero-video-overlay" />
       <div className="wrap">
         <Reveal as="h1">
           {h.heading1} <em>{h.headingEm}</em> {h.heading2}
