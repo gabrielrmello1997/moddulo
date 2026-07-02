@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import GridBackground from "./GridBackground";
 import { useLang } from "@/context/LanguageContext";
 import { t } from "@/lib/i18n";
 
@@ -19,6 +20,9 @@ export default function Hero() {
         playsInline
       />
       <div className="hero-video-overlay" />
+      <div className="hero-grid-wrap">
+        <GridBackground />
+      </div>
       <div className="wrap">
         <Reveal as="h1">
           {h.heading1} <em>{h.headingEm}</em> {h.heading2}
