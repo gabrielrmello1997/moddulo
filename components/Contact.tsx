@@ -3,9 +3,13 @@
 import { useState } from "react";
 import GridBackground from "./GridBackground";
 import Reveal from "./Reveal";
+import { useLang } from "@/context/LanguageContext";
+import { t } from "@/lib/i18n";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
+  const { lang } = useLang();
+  const c = t[lang].contact;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,24 +23,21 @@ export default function Contact() {
         <div className="contact-inner">
           <Reveal as="div">
             <div className="eyebrow">
-              <span className="bracket">|</span>Contact
+              <span className="bracket">|</span>{c.eyebrow}
               <span className="bracket">|</span>
             </div>
-            <h2>Let&apos;s build something that works better.</h2>
-            <p className="hero-sub">
-              Tell us where the friction is. We&apos;ll tell you what
-              we&apos;d do about it, no deck, no pitch, just a conversation.
-            </p>
+            <h2>{c.heading}</h2>
+            <p className="hero-sub">{c.sub}</p>
           </Reveal>
 
           <Reveal as="div">
             <form className="contact-form" onSubmit={handleSubmit}>
               <div className="field">
-                <label htmlFor="name">Name</label>
-                <input id="name" type="text" placeholder="Your name" required />
+                <label htmlFor="name">{c.labelName}</label>
+                <input id="name" type="text" placeholder={c.placeholderName} required />
               </div>
               <div className="field">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{c.labelEmail}</label>
                 <input
                   id="email"
                   type="email"
@@ -45,15 +46,15 @@ export default function Contact() {
                 />
               </div>
               <div className="field">
-                <label htmlFor="project">Project</label>
+                <label htmlFor="project">{c.labelProject}</label>
                 <textarea
                   id="project"
                   rows={2}
-                  placeholder="A line or two about what you're building"
+                  placeholder={c.placeholderProject}
                 />
               </div>
               <button className="btn btn-primary" type="submit">
-                {sent ? "Message sent" : "Start a conversation"}
+                {sent ? c.sent : c.submit}
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"

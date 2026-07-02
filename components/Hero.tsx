@@ -1,25 +1,31 @@
+"use client";
+
 import GridBackground from "./GridBackground";
 import Reveal from "./Reveal";
+import { useLang } from "@/context/LanguageContext";
+import { t } from "@/lib/i18n";
 
 export default function Hero() {
+  const { lang } = useLang();
+  const h = t[lang].hero;
+
   return (
     <section className="hero">
       <GridBackground />
       <div className="wrap">
         <Reveal as="h1">
-          Building software that <em>solves</em> real
+          {h.heading1} <em>{h.headingEm}</em> {h.heading2}
           <br />
-          business problems.
+          {h.heading3}
         </Reveal>
 
         <Reveal className="hero-sub" as="p">
-        We design and build digital solutions that simplify operations,
-        automate workflows and help businesses grow.
+          {h.sub}
         </Reveal>
 
         <Reveal className="hero-actions" as="div">
           <a className="btn btn-primary" href="#contact">
-            Talk to us
+            {h.cta}
             <svg
               viewBox="0 0 24 24"
               fill="none"
@@ -31,6 +37,7 @@ export default function Hero() {
           </a>
         </Reveal>
       </div>
+
 
       <a className="hero-scroll" href="#services">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

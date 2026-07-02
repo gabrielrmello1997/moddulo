@@ -129,9 +129,9 @@ export default function AboutWireframe() {
             ))}
           </div>
           <div className="ec-type-preview">
-            <span style={{ fontFamily: "var(--font-display)", fontSize: 13 }}>Ag</span>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 11 }}>Ag</span>
-            <span style={{ fontFamily: "var(--font-body)", fontSize: 12 }}>Ag</span>
+            <span style={{ fontFamily: "var(--font-display)", fontSize: 14 }}>Ag</span>
+            <span style={{ fontFamily: "var(--font-mono)", fontSize: 12 }}>Ag</span>
+            <span style={{ fontFamily: "var(--font-body)", fontSize: 13 }}>Ag</span>
           </div>
         </div>
 

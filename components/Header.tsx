@@ -2,9 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import { useLang } from "@/context/LanguageContext";
+import { t } from "@/lib/i18n";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const { lang, toggle } = useLang();
+  const n = t[lang].nav;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -18,17 +22,20 @@ export default function Header() {
         <Logo />
         <nav>
           <a className="navlink" href="#services">
-            Services
+            {n.services}
           </a>
           <a className="navlink" href="#approach">
-            Approach
+            {n.approach}
           </a>
           <a className="navlink" href="#about">
-            About
+            {n.about}
           </a>
           <a className="nav-cta" href="#contact">
-            Talk to us
+            {n.cta}
           </a>
+          <button className="lang-toggle" onClick={toggle} aria-label="Switch language">
+            {lang === "en" ? "PT" : "EN"}
+          </button>
         </nav>
       </div>
     </header>
