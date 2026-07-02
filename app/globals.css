@@ -201,7 +201,7 @@ footer .wrap {
 
 
 .hero h1 {
-  font-size: clamp(40px, 6.4vw, 90px);
+  font-size: clamp(38px, 6.4vw, 90px);
   max-width: 16ch;
   color: var(--ink);
 }
@@ -864,6 +864,8 @@ footer .wrap {
   text-transform: uppercase;
   color: var(--ink-dim);
   padding: 16px 0;
+  align-self: flex-start;
+  width: 80px;
   border-bottom: 1px solid var(--line);
   transition: color 0.25s var(--ease);
 }
