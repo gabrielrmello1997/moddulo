@@ -179,23 +179,6 @@ footer .wrap {
   overflow: hidden;
 }
 
-.hero-watermark {
-  position: absolute;
-  top: 50%;
-  right: 8%;
-  transform: translateY(-50%);
-  width: clamp(180px, 22vw, 240px);
-  height: auto;
-  opacity: 0.4;
-  pointer-events: none;
-  user-select: none;
-}
-
-@media (max-width: 1023px) {
-  .hero-watermark {
-    display: none;
-  }
-}
 
 .hero h1 {
   font-size: clamp(40px, 6.4vw, 90px);
