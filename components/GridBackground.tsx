@@ -2,43 +2,99 @@
 
 import { useEffect, useRef } from "react";
 
+const CELL = 60;
+const RADIUS = 180;
+const MAX_EXPAND = 8;
+
 export default function GridBackground() {
-  const ref = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let targetX = -9999;
+    let targetY = -9999;
+    let smoothX = -9999;
+    let smoothY = -9999;
     let rafId: number;
 
+    const resize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+
     const handleMouseMove = (e: MouseEvent) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 20;
+      const rect = canvas.getBoundingClientRect();
+      targetX = e.clientX - rect.left;
+      targetY = e.clientY - rect.top;
     };
 
-    const animate = () => {
-      currentX += (mouseX - currentX) * 0.05;
-      currentY += (mouseY - currentY) * 0.05;
-      el.style.transform = `translate(${currentX}px, ${currentY}px)`;
-      rafId = requestAnimationFrame(animate);
+    const handleMouseLeave = () => {
+      targetX = -9999;
+      targetY = -9999;
     };
 
+    const draw = () => {
+      smoothX += (targetX - smoothX) * 0.1;
+      smoothY += (targetY - smoothY) * 0.1;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const cols = Math.ceil(canvas.width / CELL) + 2;
+      const rows = Math.ceil(canvas.height / CELL) + 2;
+      const offsetX = (canvas.width % CELL) / 2;
+      const offsetY = (canvas.height % CELL) / 2;
+
+      for (let r = -1; r < rows; r++) {
+        for (let c = -1; c < cols; c++) {
+          const baseCX = offsetX + c * CELL;
+          const baseCY = offsetY + r * CELL;
+          const centerX = baseCX + CELL / 2;
+          const centerY = baseCY + CELL / 2;
+
+          const dist = Math.hypot(centerX - smoothX, centerY - smoothY);
+          const t = Math.max(0, 1 - dist / RADIUS);
+          // smoothstep easing
+          const eased = t * t * (3 - 2 * t);
+
+          const expand = eased * MAX_EXPAND;
+          const alpha = 0.06 + eased * 0.32;
+          const lineWidth = 0.6 + eased * 0.5;
+
+          ctx.strokeStyle = `rgba(255,255,255,${alpha})`;
+          ctx.lineWidth = lineWidth;
+          ctx.strokeRect(
+            baseCX - expand / 2,
+            baseCY - expand / 2,
+            CELL + expand,
+            CELL + expand
+          );
+        }
+      }
+
+      rafId = requestAnimationFrame(draw);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handleMouseMove);
-    rafId = requestAnimationFrame(animate);
+    window.addEventListener("mouseleave", handleMouseLeave);
+    rafId = requestAnimationFrame(draw);
 
     return () => {
+      window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(rafId);
     };
   }, []);
 
   return (
     <div className="grid-bg">
-      <div ref={ref} className="grid-bg-lines" />
+      <canvas ref={canvasRef} className="grid-bg-canvas" />
     </div>
   );
 }

@@ -12,9 +12,10 @@ export default function About() {
           <div className="about-left">
             <Reveal as="div">
               <div className="eyebrow">
-                <span className="bracket">|</span>About Us
+                <span className="bracket">|</span>About us
                 <span className="bracket">|</span>
               </div>
+              <h2>Moddulo develops software with purpose.</h2>
             </Reveal>
 
             <Reveal className="about-copy" as="div">

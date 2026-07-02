@@ -21,9 +21,12 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Moddulo — Digital systems designed to remove friction.",
+  title: "Moddulo · Digital systems designed to remove friction.",
   description:
-    "We design and build digital solutions that simplify operations, automate workflows and help businesses grow.",
+    "We build websites, apps and dashboards, but our real job is understanding your business and improving how it works.",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

@@ -32,6 +32,13 @@ export default function Hero() {
         </Reveal>
       </div>
 
+      <img
+        src="/icon.svg"
+        alt=""
+        aria-hidden="true"
+        className="hero-watermark"
+      />
+
       <a className="hero-scroll" href="#services">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M6 9l6 6 6-6" />
