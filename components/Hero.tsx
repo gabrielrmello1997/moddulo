@@ -15,8 +15,8 @@ export default function Hero() {
       <div className="wrap">
         <Reveal as="h1">
           {h.heading1} <em>{h.headingEm}</em> {h.heading2}
-          <br />
-          {h.heading3}
+          {h.headingBreak && <br />}
+          {h.headingBreak ? h.heading3 : ` ${h.heading3}`}
         </Reveal>
 
         <Reveal className="hero-sub" as="p">
