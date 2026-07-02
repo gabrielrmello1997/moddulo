@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, ReactNode, ElementType } from "react";
+import React, { useEffect, useRef, ReactNode, ElementType } from "react";
 
 interface RevealProps {
   children: ReactNode;
@@ -35,10 +35,11 @@ export default function Reveal({
     return () => io.disconnect();
   }, []);
 
+  const El = Tag as React.ElementType;
+
   return (
-    // @ts-ignore - dynamic ref typing across element types
-    <Tag ref={ref} className={`reveal ${className}`}>
+    <El ref={ref as React.Ref<Element>} className={`reveal ${className}`}>
       {children}
-    </Tag>
+    </El>
   );
 }

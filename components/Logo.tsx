@@ -1,19 +1,13 @@
 import Image from "next/image";
 
-interface LogoProps {
-  small?: boolean;
-}
-
-export default function Logo({ small = false }: LogoProps) {
-  const height = small ? 28 : 90;
-
+export default function Logo() {
   return (
     <Image
-      src="/logo1 (Copy).svg"
+      src="/logo.svg"
       alt="Moddulo"
-      height={height}
+      height={90}
       width={0}
-      style={{ width: "auto", height: height }}
+      style={{ width: "auto", height: 90 }}
       priority
     />
   );

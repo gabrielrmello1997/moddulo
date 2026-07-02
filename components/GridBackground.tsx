@@ -19,25 +19,34 @@ export default function GridBackground() {
     let targetY = -9999;
     let smoothX = -9999;
     let smoothY = -9999;
-    let rafId: number;
+    let rafId = 0;
 
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      draw();
+    };
+
+    const startRAF = () => {
+      if (rafId === 0) rafId = requestAnimationFrame(draw);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       targetX = e.clientX - rect.left;
       targetY = e.clientY - rect.top;
+      startRAF();
     };
 
     const handleMouseLeave = () => {
       targetX = -9999;
       targetY = -9999;
+      startRAF();
     };
 
     const draw = () => {
+      const prevX = smoothX;
+      const prevY = smoothY;
       smoothX += (targetX - smoothX) * 0.1;
       smoothY += (targetY - smoothY) * 0.1;
 
@@ -57,7 +66,6 @@ export default function GridBackground() {
 
           const dist = Math.hypot(centerX - smoothX, centerY - smoothY);
           const t = Math.max(0, 1 - dist / RADIUS);
-          // smoothstep easing
           const eased = t * t * (3 - 2 * t);
 
           const expand = eased * MAX_EXPAND;
@@ -75,14 +83,19 @@ export default function GridBackground() {
         }
       }
 
-      rafId = requestAnimationFrame(draw);
+      const settled =
+        Math.abs(smoothX - prevX) < 0.05 && Math.abs(smoothY - prevY) < 0.05;
+      if (settled) {
+        rafId = 0;
+      } else {
+        rafId = requestAnimationFrame(draw);
+      }
     };
 
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseleave", handleMouseLeave);
-    rafId = requestAnimationFrame(draw);
 
     return () => {
       window.removeEventListener("resize", resize);
