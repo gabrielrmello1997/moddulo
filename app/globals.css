@@ -134,7 +134,7 @@ header {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: 14px 0;
+  padding: 12px 0;
   transition: background 0.4s var(--ease), border-color 0.4s var(--ease),
     padding 0.4s var(--ease);
   border-bottom: 1px solid transparent;
@@ -143,7 +143,7 @@ header.scrolled {
   background: rgba(80, 89, 95, 0.88);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
-  padding: 14px 0;
+  padding: 12px 0;
 }
 header .wrap {
   display: flex;
